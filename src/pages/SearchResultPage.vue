@@ -32,7 +32,7 @@
         tagNameList : tags
       },
       // 对params 进行序列化操作
-      paramsSerializer: (params) => {
+      paramsSerializer: params => {
         return qs.stringify(params,{indices:false})
       }
     }).then(function (response){
