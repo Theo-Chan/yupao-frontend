@@ -17,9 +17,41 @@
 
 <script setup lang="ts">
   import {useRoute} from "vue-router";
-  import {ref} from "vue";
+  import {onMounted, ref} from "vue";
+  import myAxios from "../plugins/myAxios.ts";
+  import {showFailToast, showSuccessToast, Toast} from "vant";
+  import * as qs from 'qs'
   const route = useRoute();
   const {tags}  = route.query;
+  const userList  = ref([]);
+
+  // 使用钩子在加载的时候发送get请求获取数据
+  onMounted(async () =>{
+    const userListData = await myAxios.get('/user/search/tags',{
+      params:{
+        tagNameList : tags
+      },
+      // 对params 进行序列化操作
+      paramsSerializer: (params) => {
+        return qs.stringify(params,{indices:false})
+      }
+    }).then(function (response){
+      // 规范日志输出
+      console.log('/user/search/tags succeed ',response)
+      showSuccessToast("请求成功")
+      // 返回数据
+      return response.data?.data;
+    })
+        .catch(function (error){
+          // 规范日志输出
+          console.log('/user/search/tags error',error)
+          showFailToast("请求失败")
+        })
+    if (userListData)
+    {
+      userList.value = userListData;
+    }
+  })
   /**
    * 注意：将mockUser定义在使用之前否则会出现报错
    * **/
@@ -37,7 +69,7 @@
     tags :["java","emo","打工中"],
     createTime : new Date(),
   }
-  const userList  = ref([mockUser]);
+
 </script>
 
 <style scoped>

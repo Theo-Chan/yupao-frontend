@@ -20,11 +20,11 @@
 
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {ref} from "vue";
+import {Ref, ref} from "vue";
 
 const route = useRoute();
 // 封装一个响应式对象
-const editUser = ref({
+const editUser:Ref = ref({
   editKey:route.query.editKey,
   currentValue:route.query.currentValue,
   editName:route.query.editName,
