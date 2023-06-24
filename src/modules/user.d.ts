@@ -3,7 +3,7 @@ type UserType = {
     id:number;
     username: string;
     userAccount : string;
-    avataUrl? : string;
+    avatarUrl? : string;
     profile ? :string;
     gender : number;
     phone : string;

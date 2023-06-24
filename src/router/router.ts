@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound.vue";
 import Search from "../pages/search.vue";
 import UserEditPage from "../pages/UserEditPage.vue";
 import SearchResultPage from "../pages/SearchResultPage.vue";
+import uerLoginPage from "../pages/userLoginPage.vue"
 const routes = [
     {
         path:"/",
@@ -40,6 +41,10 @@ const routes = [
     {
         path: "/user/list",
         component: SearchResultPage
+    },
+    {
+        path: "/user/login",
+        component: uerLoginPage
     }
 
 ]
@@ -49,4 +54,5 @@ const router  = createRouter(
         routes,
     }
 )
+// 需要导出才能在main.ts 使用
 export default router

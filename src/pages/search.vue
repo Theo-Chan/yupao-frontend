@@ -104,7 +104,6 @@ const tagList =ref([
       { text: '大四', id: "大四" },
     ],
   },
-  { text: '福建', disabled: true },
 ])
 /*
 * 执行搜索
