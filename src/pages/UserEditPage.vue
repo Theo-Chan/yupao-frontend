@@ -20,9 +20,11 @@
 
 <script setup lang="ts">
 import {useRoute, useRouter} from "vue-router";
-import {Ref, ref} from "vue";
+import {onMounted, Ref, ref} from "vue";
 import myAxios from "../plugins/myAxios";
 import {showFailToast, showSuccessToast} from "vant";
+import {getCurrentUser} from "../services/user";
+import {getCurrentUserState} from "../states/userState.ts";
 const router = useRouter();
 const route = useRoute();
 // 封装一个响应式对象
@@ -32,13 +34,21 @@ const editUser:Ref = ref({
   editName:route.query.editName,
 })
 console.log(route.query.editKey)
+
 const onSubmit =async () => {
+  // getCurrentUser为异步操作 使用await拿到对象
+  const currrentUser = await getCurrentUser();
+  if (!currrentUser)
+  {
+    showFailToast("用户未登录")
+    return;
+  }
   const res = await myAxios.post('/user/update',{
-    // todo 登录获取当前用户id
-    'id' : 234,
+    'id' : currrentUser.id,
     // [] 方式是动态变量名
     [editUser.value.editKey] : editUser.value.currentValue
   })
+  // @ts-ignore
   if (res.code === 0 && res.data > 0 )
   {
     showSuccessToast('修改成功')

@@ -10,7 +10,7 @@
         <van-icon name="search" size="18" />
       </template>
   </van-nav-bar>
-  <div name = "content">
+  <div id= "content">
       <router-view/>
   </div>
 
@@ -44,5 +44,8 @@ const onChange = (index) => showToast(` ${index}`);
 </script>
 
 <style scoped>
+#content{
+  padding-bottom: 50px;
+}
 
 </style>

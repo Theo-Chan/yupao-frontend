@@ -7,6 +7,7 @@ import Search from "../pages/search.vue";
 import UserEditPage from "../pages/UserEditPage.vue";
 import SearchResultPage from "../pages/SearchResultPage.vue";
 import uerLoginPage from "../pages/userLoginPage.vue"
+import userCardList from "../pages/userCardList.vue"
 const routes = [
     {
         path:"/",
@@ -45,6 +46,11 @@ const routes = [
     {
         path: "/user/login",
         component: uerLoginPage
+    },
+    // todo 准备删除
+    {
+        path: "/usercardlist",
+        component: userCardList
     }
 
 ]

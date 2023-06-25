@@ -10,7 +10,7 @@ type UserType = {
     email : string;
     userStatus : number;
     userRole : number;
-    palanetCode : string;
+    planetCode : string;
     tags :string[];
     createTime : Date;
 };
