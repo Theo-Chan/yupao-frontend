@@ -1,7 +1,7 @@
 <template>
-
+<!--将公共的列表提取出来以组件的形式引入-->
   <!--  卡片-->
-  <van-card v-for="user in userList"
+  <van-card v-for="user in props.userList"
             :desc="user.profile"
             :title="`${user.username}(${user.planetCode})`"
             tag="角标" :thumb="user.avatarUrl"
@@ -18,7 +18,14 @@
 </template>
 
 <script setup lang="ts">
-
+//定义一个数据类型用于接收父组件传递过来的值
+interface UserCardListProps{
+  userList:UserType[]
+}
+// 给userList一个初始默认值防止穿过来的是一个 null
+const props =withDefaults(defineProps<UserCardListProps>(),{
+  userList:[] as UserType[]
+})
 </script>
 
 <style scoped>
