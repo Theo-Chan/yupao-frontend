@@ -15,14 +15,20 @@ import UserCardList from "./userCardList.vue";
 const userList  = ref([]);
 // 使用钩子在加载的时候发送get请求获取数据
 onMounted(async () =>{
-  const userListData:[UserType]  = await myAxios.get('/user/recommend',{})
+  const userListData:[UserType]  = await myAxios.get('/user/recommend',{
+    params:{
+      pageSize : 8,
+      pageNum :1
+    }
+  })
       .then(function (response)
       {
         // 规范日志输出
         console.log('/user/recommend succeed ',response)
         showSuccessToast("请求成功")
         // 返回数据
-        return response?.data;
+        // 这里的返回数据是response.data.records
+        return response?.data?.records;
       })
       .catch(function (error){
         // 规范日志输出
